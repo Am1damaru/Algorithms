@@ -4,7 +4,7 @@
     {
         public const string NOT_FOUND = "NOT-FOUND";
 
-        public static string Search<T>(T[] array, int countElements, T searchedElement) where T : IComparable<T>
+        public static string BasicSearch<T>(T[] array, int countElements, T searchedElement) where T : IComparable<T>
         {
             string answer = NOT_FOUND;
 
@@ -36,8 +36,8 @@
 
         public static string SearchWithSentinel<T>(T[] array, int countElements, T searchedElement) where T : IComparable<T>
         {
-            var lastElement = array[countElements];
-            array[countElements] = searchedElement;
+            var lastElement = array[countElements - 1];
+            array[countElements - 1] = searchedElement;
             int index = 0;
 
             while (array[index].CompareTo(searchedElement) != 0)
@@ -45,9 +45,9 @@
                 index++;
             }
 
-            array[countElements] = lastElement;
+            array[countElements - 1] = lastElement;
 
-            if ((index < countElements) || (array[index].CompareTo(searchedElement) == 0))
+            if ((index < countElements - 1) || (array[index].CompareTo(searchedElement) == 0))
                 return index.ToString();
             return NOT_FOUND;
         }

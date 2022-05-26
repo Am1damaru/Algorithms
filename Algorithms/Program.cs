@@ -1,3 +1,1 @@
-﻿using Algorithms;
-
-FunctionsToCheck.CheckLinearSearchWithSentinel();
+﻿Console.ReadLine();
