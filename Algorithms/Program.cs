@@ -1,1 +1,1 @@
-﻿Console.ReadLine();
+Console.ReadLine();
