@@ -8,7 +8,7 @@
         {
             string answer = NOT_FOUND;
 
-            for (int index = 0; index < countElements; index++)
+            for (int index = 0; index <= countElements; index++)
             {
                 if (array[index].CompareTo(searchedElement) == 0)
                 {
@@ -23,11 +23,11 @@
         {
             string answer = NOT_FOUND;
 
-            for (int index = 0; index < countElements; index++)
+            for (int index = 0; index <= countElements; index++)
             {
                 if (array[index].CompareTo(searchedElement) == 0)
                 {
-                    return answer = index.ToString();
+                    return index.ToString();
                 }
             }
 
@@ -36,8 +36,8 @@
 
         public static string SearchWithSentinel<T>(T[] array, int countElements, T searchedElement) where T : IComparable<T>
         {
-            var lastElement = array[countElements - 1];
-            array[countElements - 1] = searchedElement;
+            var lastElement = array[countElements];
+            array[countElements] = searchedElement;
             int index = 0;
 
             while (array[index].CompareTo(searchedElement) != 0)
@@ -45,9 +45,9 @@
                 index++;
             }
 
-            array[countElements - 1] = lastElement;
+            array[countElements] = lastElement;
 
-            if ((index < countElements - 1) || (array[index].CompareTo(searchedElement) == 0))
+            if ((index < countElements) || (array[index].CompareTo(searchedElement) == 0))
                 return index.ToString();
             return NOT_FOUND;
         }

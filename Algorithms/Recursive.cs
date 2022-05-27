@@ -42,9 +42,14 @@
             }
         }
 
-        public static string RecursiveSearch<T>(T[] array, int countElements, int index, T searchedElement) where T : IComparable<T>
+        public static string RecursiveLinearSearch<T>(T[] array, int countElements, int index, T searchedElement) where T : IComparable<T>
         {
             return LinearSearch.RecursiveSearch<T>(array, countElements, index, searchedElement);
+        }
+
+        public static string RecursiveBinarySearch<T>(T[] array, int leftLimit, int rightLimit, T searchedElement) where T : IComparable<T>
+        {
+            return BinarySearch.RecursiveSearch<T>(array, leftLimit, rightLimit, searchedElement);
         }
     }
 }
