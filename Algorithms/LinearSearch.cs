@@ -4,11 +4,11 @@
     {
         public const string NOT_FOUND = "NOT-FOUND";
 
-        public static string BasicSearch<T>(T[] array, int countElements, T searchedElement) where T : IComparable<T>
+        public static string BasicSearch<T>(T[] array, int amountSortedItems, T searchedElement) where T : IComparable<T>
         {
             string answer = NOT_FOUND;
 
-            for (int index = 0; index <= countElements; index++)
+            for (int index = 0; index < amountSortedItems; index++)
             {
                 if (array[index].CompareTo(searchedElement) == 0)
                 {
@@ -19,11 +19,11 @@
             return answer;
         }
 
-        public static string BetterSearch<T>(T[] array, int countElements, T searchedElement) where T : IComparable<T>
+        public static string BetterSearch<T>(T[] array, int amountSortedItems, T searchedElement) where T : IComparable<T>
         {
             string answer = NOT_FOUND;
 
-            for (int index = 0; index <= countElements; index++)
+            for (int index = 0; index < amountSortedItems; index++)
             {
                 if (array[index].CompareTo(searchedElement) == 0)
                 {
@@ -34,10 +34,11 @@
             return answer;
         }
 
-        public static string SearchWithSentinel<T>(T[] array, int countElements, T searchedElement) where T : IComparable<T>
+        public static string SearchWithSentinel<T>(T[] array, int amountSortedItems, T searchedElement) where T : IComparable<T>
         {
-            var lastElement = array[countElements];
-            array[countElements] = searchedElement;
+            int indexLastElement = amountSortedItems - 1;
+            var lastElement = array[indexLastElement];
+            array[indexLastElement] = searchedElement;
             int index = 0;
 
             while (array[index].CompareTo(searchedElement) != 0)
@@ -45,16 +46,17 @@
                 index++;
             }
 
-            array[countElements] = lastElement;
+            array[indexLastElement] = lastElement;
 
-            if ((index < countElements) || (array[index].CompareTo(searchedElement) == 0))
+            if ((index < indexLastElement) || (array[index].CompareTo(searchedElement) == 0))
                 return index.ToString();
             return NOT_FOUND;
         }
 
-        public static string RecursiveSearch<T>(T[] array, int countElements, int index, T searchedElement) where T : IComparable<T>
+        public static string RecursiveSearch<T>(T[] array, int amountSortedItems, int index, T searchedElement) where T : IComparable<T>
         {
-            if (index > countElements)
+            int indexLastElement = amountSortedItems - 1;
+            if (index > indexLastElement)
             {
                 return NOT_FOUND;
             }
@@ -64,7 +66,7 @@
             }
             else
             {
-                return RecursiveSearch<T>(array, countElements, index + 1, searchedElement);
+                return RecursiveSearch<T>(array, indexLastElement, index + 1, searchedElement);
             }
         }
     }

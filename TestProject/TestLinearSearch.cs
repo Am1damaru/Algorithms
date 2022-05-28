@@ -35,7 +35,7 @@ namespace TestProject
         [TestCase(2)]
         public void PositiveTestIntArray(int functionNumber)
         {
-            string stringIndex = intFunctions[functionNumber](intArray, 9, 9);
+            string stringIndex = intFunctions[functionNumber](intArray, intArray.Length, 9);
             int index = int.Parse(stringIndex);
             Assert.AreEqual(index, 9);
         }
@@ -45,7 +45,7 @@ namespace TestProject
         [TestCase(2)]
         public void PositiveTestStringArray(int functionNumber)
         {
-            string stringIndex = stringFunctions[functionNumber](stringArray, 9, "text" + 9);
+            string stringIndex = stringFunctions[functionNumber](stringArray, stringArray.Length, "text" + 9);
             int index = int.Parse(stringIndex);
             Assert.AreEqual(index, 9);
         }
@@ -55,7 +55,7 @@ namespace TestProject
         [TestCase(2)]
         public void NegativeTestIntArray(int functionNumber)
         {
-            string stringIndex = intFunctions[functionNumber](intArray, 9, 13);
+            string stringIndex = intFunctions[functionNumber](intArray, intArray.Length, 13);
             Assert.AreEqual(stringIndex, Algorithms.LinearSearch.NOT_FOUND);
         }
 
@@ -64,7 +64,7 @@ namespace TestProject
         [TestCase(2)]
         public void NegativeTestStringArray(int functionNumber)
         {
-            string stringIndex = stringFunctions[functionNumber](stringArray, 9, "text" + 37);
+            string stringIndex = stringFunctions[functionNumber](stringArray, stringArray.Length, "text" + 37);
             Assert.AreEqual(stringIndex, Algorithms.LinearSearch.NOT_FOUND);
         }
 
