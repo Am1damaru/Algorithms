@@ -40,5 +40,51 @@ namespace Algorithms
                 array[j + 1] = key;
             }
         }
+
+        public static void MergeSort<T>(T[] array, int initialIndexSubarray, int finalIndexSubarray) where T : IComparable<T>
+        {
+            if (initialIndexSubarray >= finalIndexSubarray)
+            {
+                return;
+            } 
+            else
+            {
+                int middleIndexSubarray = (finalIndexSubarray + initialIndexSubarray) / 2;
+                MergeSort(array, initialIndexSubarray, middleIndexSubarray);
+                MergeSort(array, middleIndexSubarray + 1, finalIndexSubarray);
+                Merge(array, initialIndexSubarray, middleIndexSubarray, finalIndexSubarray);
+            }
+        }
+
+
+
+        #region SupportMethods
+        private static void Merge<T>(T[] array, int initialIndexSubarray, int middleIndexSubarray, int finalIndexSubarray) where T : IComparable<T>
+        {
+            int sizeFirstArray = middleIndexSubarray - initialIndexSubarray + 1;
+            int sizeSecondArray = finalIndexSubarray - middleIndexSubarray;
+            T[] firstArray = new T[sizeFirstArray];
+            T[] secondArray = new T[sizeSecondArray];
+            Array.Copy(array, initialIndexSubarray, firstArray, 0, sizeFirstArray);
+            Array.Copy(array, middleIndexSubarray + 1, secondArray, 0, sizeSecondArray);
+
+            int i = 0;
+            int j = 0;
+
+            for (int index = initialIndexSubarray; index <= finalIndexSubarray; index++)
+            {
+                if ((j >= secondArray.Length) || (i < firstArray.Length && (firstArray[i].CompareTo(secondArray[j]) <= 0)))
+                {
+                    array[index] = firstArray[i];
+                    i++;
+                }
+                else
+                {
+                    array[index] = secondArray[j];
+                    j++;
+                }
+            }
+        }
+        #endregion
     }
 }

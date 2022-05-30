@@ -52,6 +52,26 @@ namespace TestProject
             Assert.AreEqual(list, sortedList);
         }
 
+        [Test]
+        public void TestStringMergeSort()
+        {
+            List<string> sortedList = new List<string>(stringArray);
+            sortedList.Sort();
+            Algorithms.Sorting.MergeSort(stringArray, 0, stringArray.Length - 1);
+            List<string> list = new List<string>(stringArray);
+            Assert.AreEqual(list, sortedList);
+        }
+
+        [Test]
+        public void TestIntMergeSort()
+        {
+            List<int> sortedList = new List<int>(intArray);
+            sortedList.Sort();
+            Algorithms.Sorting.MergeSort(intArray, 0, intArray.Length - 1);
+            List<int> list = new List<int>(intArray);
+            Assert.AreEqual(list, sortedList);
+        }
+
         private void SetupStringArray(int countElements)
         {
             Random random = new Random();
