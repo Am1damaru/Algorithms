@@ -21,6 +21,16 @@ namespace TestProject
             Algorithms.Sorting.InsertionSort
         };
 
+        private Action<int[], int, int>[] recursiveIntFunctions = {
+            Algorithms.Sorting.MergeSort,
+            Algorithms.Sorting.QuickSort
+        };
+
+        private Action<string[], int, int>[] recursiveStringFunctions = {
+            Algorithms.Sorting.MergeSort,
+            Algorithms.Sorting.QuickSort
+        };
+
         [SetUp]
         public void Setup()
         {
@@ -52,22 +62,24 @@ namespace TestProject
             Assert.AreEqual(list, sortedList);
         }
 
-        [Test]
-        public void TestStringMergeSort()
+        [TestCase(0)]
+        [TestCase(1)]
+        public void TestRecursiveStringSort(int functionNumber)
         {
             List<string> sortedList = new List<string>(stringArray);
             sortedList.Sort();
-            Algorithms.Sorting.MergeSort(stringArray, 0, stringArray.Length - 1);
+            recursiveStringFunctions[functionNumber](stringArray, 0, stringArray.Length - 1);
             List<string> list = new List<string>(stringArray);
             Assert.AreEqual(list, sortedList);
         }
 
-        [Test]
-        public void TestIntMergeSort()
+        [TestCase(0)]
+        [TestCase(1)]
+        public void TestRecursiveIntSort(int functionNumber)
         {
             List<int> sortedList = new List<int>(intArray);
             sortedList.Sort();
-            Algorithms.Sorting.MergeSort(intArray, 0, intArray.Length - 1);
+            recursiveIntFunctions[functionNumber](intArray, 0, intArray.Length - 1);
             List<int> list = new List<int>(intArray);
             Assert.AreEqual(list, sortedList);
         }

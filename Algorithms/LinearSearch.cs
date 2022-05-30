@@ -55,8 +55,7 @@
 
         public static string RecursiveSearch<T>(T[] array, int amountSortedItems, int index, T searchedElement) where T : IComparable<T>
         {
-            int indexLastElement = amountSortedItems - 1;
-            if (index > indexLastElement)
+            if (index >= amountSortedItems)
             {
                 return NOT_FOUND;
             }
@@ -66,7 +65,7 @@
             }
             else
             {
-                return RecursiveSearch<T>(array, indexLastElement, index + 1, searchedElement);
+                return RecursiveSearch<T>(array, amountSortedItems, index + 1, searchedElement);
             }
         }
     }

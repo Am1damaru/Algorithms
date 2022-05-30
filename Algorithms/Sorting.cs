@@ -5,6 +5,7 @@ namespace Algorithms
 {
     public static class Sorting
     {
+        private static Random _random = new Random();
         public static void SelectionSort<T>(T[] array, int amountSortedItems) where T : IComparable<T>
         {
             for (int i = 0; i < amountSortedItems - 1; i++)
@@ -18,10 +19,7 @@ namespace Algorithms
                         smallest = j;
                     }
                 }
-
-                var temp = array[smallest];
-                array[smallest] = array[i];
-                array[i] = temp;
+                Swap(array, smallest, i);
             }
         }
 
@@ -56,7 +54,19 @@ namespace Algorithms
             }
         }
 
-
+        public static void QuickSort<T>(T[] array, int initialIndexSubarray, int finalIndexSubarray) where T : IComparable<T>
+        {
+            if (initialIndexSubarray >= finalIndexSubarray)
+            {
+                return;
+            }
+            else
+            {
+                int middleIndex = Partition(array, initialIndexSubarray, finalIndexSubarray);
+                QuickSort(array, initialIndexSubarray, middleIndex - 1);
+                QuickSort(array, middleIndex + 1, finalIndexSubarray);
+            }
+        }
 
         #region SupportMethods
         private static void Merge<T>(T[] array, int initialIndexSubarray, int middleIndexSubarray, int finalIndexSubarray) where T : IComparable<T>
@@ -84,6 +94,30 @@ namespace Algorithms
                     j++;
                 }
             }
+        }
+
+        private static int Partition<T>(T[] array, int initialIndexSubarray, int finalIndexSubarray) where T : IComparable<T>
+        {
+            int randomIndex = _random.Next(initialIndexSubarray, finalIndexSubarray + 1);
+            Swap(array, randomIndex, finalIndexSubarray);
+            int border = initialIndexSubarray;
+            for (int index = initialIndexSubarray; index < finalIndexSubarray; index++)
+            {
+                if (array[index].CompareTo(array[finalIndexSubarray]) <= 0)
+                {
+                    Swap(array, index, border);
+                    border++;
+                }
+            }
+            Swap(array, border, finalIndexSubarray);
+            return border;
+        }
+
+        private static void Swap<T>(T[] array, int firstIndex, int SecondIndex)
+        {
+            var temp = array[firstIndex];
+            array[firstIndex] = array[SecondIndex];
+            array[SecondIndex] = temp;
         }
         #endregion
     }
