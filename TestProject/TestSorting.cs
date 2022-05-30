@@ -34,7 +34,7 @@ namespace TestProject
         [SetUp]
         public void Setup()
         {
-            int countElement = 10;
+            int countElement = 20;
 
             SetupStringArray(countElement);
             SetupIntegerArray(countElement);
@@ -84,6 +84,16 @@ namespace TestProject
             Assert.AreEqual(list, sortedList);
         }
 
+        [Test]
+        public void TestCountingSort()
+        {
+            List<int> sortedList = new List<int>(intArray);
+            sortedList.Sort();
+            intArray = Algorithms.Sorting.CountingSort(intArray, intArray.Length, 10);
+            List<int> list = new List<int>(intArray);
+            Assert.AreEqual(list, sortedList);
+        }
+
         private void SetupStringArray(int countElements)
         {
             Random random = new Random();
@@ -101,7 +111,7 @@ namespace TestProject
 
             for (int i = 0; i < countElements; i++)
             {
-                intArray[i] = random.Next(1, 100);
+                intArray[i] = random.Next(0, 10);
             }
         }
     }

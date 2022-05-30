@@ -44,7 +44,7 @@ namespace Algorithms
             if (initialIndexSubarray >= finalIndexSubarray)
             {
                 return;
-            } 
+            }
             else
             {
                 int middleIndexSubarray = (finalIndexSubarray + initialIndexSubarray) / 2;
@@ -66,6 +66,15 @@ namespace Algorithms
                 QuickSort(array, initialIndexSubarray, middleIndex - 1);
                 QuickSort(array, middleIndex + 1, finalIndexSubarray);
             }
+        }
+
+        public static int[] CountingSort(int[] array, int countElementsArray, int rangeValuesArray)
+        {
+            int[] intermediateArray = new int[rangeValuesArray];
+            Array.Fill(intermediateArray, 0);
+            CountKeysEqual(array, intermediateArray, countElementsArray);
+            CountKeysLess(intermediateArray);
+            return Rearrange(array, intermediateArray, countElementsArray);
         }
 
         #region SupportMethods
@@ -111,6 +120,44 @@ namespace Algorithms
             }
             Swap(array, border, finalIndexSubarray);
             return border;
+        }
+
+        private static void CountKeysEqual(int[] array, int[] intermediateArray, int countElementsArray)
+        {
+            for (int index = 0; index < countElementsArray; index++)
+            {
+                int key = array[index];
+                intermediateArray[key] += 1;
+            }
+        }
+
+        private static void CountKeysLess(int[] intermediateArray)
+        {
+            int previousFirstValue = intermediateArray[0];
+            int previousSecondValue;
+            intermediateArray[0] = 0;
+
+            for (int index = 1; index < intermediateArray.Length; index++)
+            {
+                previousSecondValue = intermediateArray[index];
+                intermediateArray[index] = previousFirstValue + intermediateArray[index - 1];
+                previousFirstValue = previousSecondValue;
+            }
+        }
+
+        private static int[] Rearrange(int[] array, int[] intermediateArray, int countElementsArray)
+        {
+            int[] finalArray = new int[countElementsArray];
+
+            for (int counter = 0; counter < countElementsArray; counter++)
+            {
+                int key = array[counter];
+                int index = intermediateArray[key];
+                finalArray[index] = array[counter];
+                intermediateArray[key] += 1;
+            }
+
+            return finalArray;
         }
 
         private static void Swap<T>(T[] array, int firstIndex, int SecondIndex)
