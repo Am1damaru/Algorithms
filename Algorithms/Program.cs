@@ -1,6 +1,6 @@
 using Algorithms;
 
-Graph<int> graph= new Graph<int>();
+GraphWithWeights<int> graph= new GraphWithWeights<int>();
 graph.AddLink(5, 2);
 graph.AddLink(5, 0);
 graph.AddLink(4, 0);
